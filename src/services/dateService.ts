@@ -1,15 +1,15 @@
-import { monthList, dayList } from '../types/enums';
+import { monthList, dayList } from "../types/enums";
 
 class DateForChat {
-getFormatDate(dateFromData: string | Date) {
+  getFormatDate(dateFromData: string | Date) {
     const date = new Date(dateFromData);
     if (this.isToday(date)) return "Today";
     else if (this.isYesterday(date)) return "Yesterday";
     else {
-        const day = dayList[date.getDay()];
-        const month = monthList[date.getMonth()];
-        const number = date.getDate();
-        return `${day}, ${month}, ${number}th`;
+      const day = dayList[date.getDay()];
+      const month = monthList[date.getMonth()];
+      const number = date.getDate();
+      return `${day}, ${month}, ${number}th`;
     }
   }
 
@@ -26,6 +26,10 @@ getFormatDate(dateFromData: string | Date) {
   comparator(first: Date, second: Date) {
     return first.getDate() === second.getDate() &&
       first.getMonth() === second.getMonth() &&
-      first.getFullYear() === second.getFullYear() ? true : false;
+      first.getFullYear() === second.getFullYear()
+      ? true
+      : false;
   }
 }
+
+export default new DateForChat();
