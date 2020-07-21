@@ -14,7 +14,7 @@ interface ListProps {
   deleteMessage: Function;
 }
 
-class MessageList extends React.Component<ListProps, ListState> {
+export default class MessageList extends React.Component<ListProps, ListState> {
   static propTypes = {
     user: PropTypes.string,
     messages: PropTypes.array,
@@ -48,5 +48,3 @@ class MessageList extends React.Component<ListProps, ListState> {
     )
   }
 }
-
-export default MessageList;
