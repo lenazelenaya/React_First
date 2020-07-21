@@ -1,10 +1,10 @@
 import React from "react";
 
-interface IState {}
+interface FooterState {}
 
-interface IProps {}
+interface FooterProps {}
 
-export default class Footer extends React.Component<IProps, IState> {
+export default class Footer extends React.Component<FooterProps, FooterState> {
   render() {
     return (
       <footer className="footer">

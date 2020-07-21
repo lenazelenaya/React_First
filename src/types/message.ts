@@ -1,4 +1,4 @@
-export interface Message {
+export default interface Message {
     id: string;
     text: string;
     user: string;
@@ -6,6 +6,6 @@ export interface Message {
     editedAt?: Date | string;
     createdAt: Date | string;
     likes?: number;
-    formattedTime?: string;
+    timeShow?: string;
   }
   
