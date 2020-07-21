@@ -1,26 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Message } from '../types/message';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface ChatState {
+    isLoading: boolean;
+    messagesInList?: Message[];
+    name: string;
+    participants?: number;
+    messages?: number;
 }
 
-export default App;
+interface ChatProps {}
+
+class Chat extends React.Component<ChatProps, ChatState> {
+  constructor(props: ChatProps) {
+    super(props);
+    this.state = {
+      name: "LOGO",
+      isLoading: true,
+    };
+  }
+  render(){
+    return(
+      <div className="chat-wrapper">
+      </div>
+    );
+  }
+
+}
+export default Chat;
