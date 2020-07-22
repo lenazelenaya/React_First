@@ -8,11 +8,10 @@ class ChatService {
     const type: string = "GET";
     const response: Response = await callWebApi(endpoint, type);
     const messages: Message[] = await response.json();
-    const msgs: Message[] = messages.map((message) => {
+    messages.map((message) => {
       message.timeShow = this.getTimeShow(message.createdAt);
-      return message;
     });
-    return msgs.sort(this.dateComparator);
+    return messages.sort(this.dateComparator);
   }
 
   //Time that is seen on the message box
@@ -30,11 +29,11 @@ class ChatService {
   };
 
   getParticipantsCount(messages: Message[] | undefined) {
-    if (messages === undefined) return 0;
+    if(messages === undefined) return 0;
     const list = new Set();
-    for(let i = 0; i < messages.length; i++){
-      list.add(messages[i].user);
-    }
+    messages.map((message) => {
+      list.add(message.user);
+    });
     return list.size;
   }
 
@@ -46,7 +45,7 @@ class ChatService {
     return { messages, participants, messageCount };
   }
 
-  generateId() {
+  generateId(){
     return (Math.random() * new Date().getTime()).toString();
   }
 }

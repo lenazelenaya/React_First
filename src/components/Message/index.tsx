@@ -11,15 +11,26 @@ interface MessageProps {
   editMessage: Function;
   deleteMessage: Function;
 }
-interface MessageState {}
+interface MessageState {
+  likes?: number;
+}
 
-class MessageC extends React.Component<MessageProps, MessageState> {
+export default class MessageC extends React.Component<
+  MessageProps,
+  MessageState
+> {
   static propTypes = {
     message: PropTypes.object,
     addLike: PropTypes.func,
     editMessage: PropTypes.func,
     deleteMessage: PropTypes.func,
   };
+  constructor(props: MessageProps){
+    super(props);
+      this.state = {
+        likes: 0,
+      }
+  }
 
   yourMessage = (
     <div className="message-container your-message">
@@ -65,15 +76,15 @@ class MessageC extends React.Component<MessageProps, MessageState> {
         </div>
         <div className="message-text">{this.props.message.text}</div>
         <div className="actions">
-          <button
+          <div
             className="message-like action"
             onClick={() => this.props.addLike(this.props.message)}
           >
-            {this.props.message.likes ? "You like this" : "Like?"}
-          </button>
-          <span className="like">
-            {this.props.message.likes ? this.props.message.likes : null}{" "}
-          </span>
+            <span className="like">
+              {this.props.message.likes ? this.props.message.likes : null}{" "}
+              {this.props.message.likes ? "You like this" : "Like?"}
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -85,5 +96,3 @@ class MessageC extends React.Component<MessageProps, MessageState> {
       : this.notYourMessage;
   }
 }
-
-export default MessageC;
