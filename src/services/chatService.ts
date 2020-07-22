@@ -30,7 +30,7 @@ class ChatService {
   };
 
   getParticipantsCount(messages: Message[] | undefined) {
-    if(messages === undefined) return 0;
+    if (messages === undefined) return 0;
     const list = new Set();
     messages.map((message) => {
       list.add(message.user);
@@ -46,7 +46,7 @@ class ChatService {
     return { messages, participants, messageCount };
   }
 
-  generateId(){
+  generateId() {
     return (Math.random() * new Date().getTime()).toString();
   }
 }

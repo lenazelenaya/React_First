@@ -3,13 +3,12 @@ import Message from "../types/message";
 import cs from "../services/chatService";
 import MessageList from "../components/MessageList";
 import Spinner from "../components/Spinner";
-import ChatHeader from '../components/ChatHeader/index'
-import MessageInput from '../components/MessageInput/index'
-import MainHeader from '../components/MainHeader/index'
-import Footer from '../components/Footer/index'
+import ChatHeader from "../components/ChatHeader/index";
+import MessageInput from "../components/MessageInput/index";
+import MainHeader from "../components/MainHeader/index";
+import Footer from "../components/Footer/index";
 
-import './chat.css'
-
+import "./chat.css";
 
 interface ChatState {
   isLoading: boolean;
@@ -18,7 +17,7 @@ interface ChatState {
   name: string;
   participants?: number;
   messageCount?: number;
-  lastMessage?: string; 
+  lastMessage?: string;
 }
 
 interface ChatProps {}
@@ -50,11 +49,11 @@ class Chat extends React.Component<ChatProps, ChatState> {
     });
   }
 
-  addLike(id: string) {
+  addLike(message: Message) {
     const messages = this.state.messages;
-    for(let i = 0; i < messages!.length; i++){
-      if(messages![i].id === id) {
-        if(messages![i].likes === 1) messages![i].likes = 0;
+    for (let i = 0; i < messages!.length; i++) {
+      if (messages![i].id === message.id) {
+        if (messages![i].likes === 1) messages![i].likes = 0;
         else messages![i].likes = 1;
       }
     }
@@ -66,7 +65,7 @@ class Chat extends React.Component<ChatProps, ChatState> {
       const messages = this.state.messages;
       const date = new Date();
       messages!.push({
-        id: '17',
+        id: "17",
         text,
         user: "You",
         createdAt: date,
@@ -74,58 +73,60 @@ class Chat extends React.Component<ChatProps, ChatState> {
       });
       const count = this.state.messageCount! + 1;
       const participants = cs.getParticipantsCount(messages);
-      
-      this.setState({ messages, messageCount: count, lastMessage: cs.getTimeShow(date), participants });
-      
+
+      this.setState({
+        messages,
+        messageCount: count,
+        lastMessage: cs.getTimeShow(date),
+        participants,
+      });
     }
   }
 
   deleteMessage(message: Message) {
     const messages = this.state.messages;
-    for(let i = 0; i < messages!.length; i++){
-      if(messages![i].id === message.id) {
-          messages![i].text = "This message has been deleted";
+    for (let i = 0; i < messages!.length; i++) {
+      if (messages![i].id === message.id) {
+        messages![i].text = "This message has been deleted";
       }
     }
     const c = this.state.messageCount! - 1;
     this.setState({ messages, messageCount: c });
   }
 
-  editMessage(id: string) {
+  editMessage(message: Message) {
     const messages = this.state.messages;
-    // for(let i = 0; i < messages!.length; i++){
-    //   if(messages![i].id === id) {
-        
-    //   }
+    for (let i = 0; i < messages!.length; i++) {
+      if (messages![i].id === message.id) {
+      }
+    }
 
     this.setState({ messages, modalOn: true });
   }
 
   render() {
-
     return (
-    <div className="chat-wrapper">
-        <MainHeader
-          name={this.state.name!}
-        />
-        {
-          this.state.isLoading  ? <Spinner /> :
-        (<div className="chat-window">
-          <ChatHeader 
-            name={this.state.name! + '-chat'}
-            participants={this.state.participants!}
-            messageCount={this.state.messageCount!}
-            lastMessage={this.state.lastMessage!}
-          />
-          <MessageList
-            messages={this.state.messages!}
-            addLike={this.addLike}
-            deleteMessage={this.deleteMessage}
-            editMessage={this.editMessage}
-          />
-          <MessageInput addMessage={this.addMessage} />
-        </div>)
-        }
+      <div className="chat-wrapper">
+        <MainHeader name={this.state.name!} />
+        {this.state.isLoading ? (
+          <Spinner />
+        ) : (
+          <div className="chat-window">
+            <ChatHeader
+              name={this.state.name! + "-chat"}
+              participants={this.state.participants!}
+              messageCount={this.state.messageCount!}
+              lastMessage={this.state.lastMessage!}
+            />
+            <MessageList
+              messages={this.state.messages!}
+              addLike={this.addLike}
+              deleteMessage={this.deleteMessage}
+              editMessage={this.editMessage}
+            />
+            <MessageInput addMessage={this.addMessage} />
+          </div>
+        )}
         <Footer />
       </div>
     );

@@ -1,10 +1,8 @@
-import React from 'react'
-import './index.css'
+import React from "react";
+import "./index.css";
 
-function spinner(){
-    return (
-        <div className="loader">Loading...</div>
-    );
+function spinner() {
+  return <div className="loader">Loading...</div>;
 }
 
 export default spinner;

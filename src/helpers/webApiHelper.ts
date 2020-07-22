@@ -1,6 +1,6 @@
 export async function throwIfResponseFailed(res: any) {
   if (!res.ok) {
-    let parsedException = 'Something went wrong with request!';
+    let parsedException = "Something went wrong with request!";
     try {
       parsedException = await res.json();
     } catch (err) {

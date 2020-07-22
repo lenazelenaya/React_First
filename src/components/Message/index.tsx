@@ -13,10 +13,7 @@ interface MessageProps {
 }
 interface MessageState {}
 
-class MessageC extends React.Component<
-  MessageProps,
-  MessageState
-> {
+class MessageC extends React.Component<MessageProps, MessageState> {
   static propTypes = {
     message: PropTypes.object,
     addLike: PropTypes.func,

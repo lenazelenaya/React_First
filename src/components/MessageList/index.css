@@ -5,15 +5,19 @@
   flex-direction: column;
   overflow-y: auto;
 
-  box-shadow: inset 0px 11px 8px -10px #CCC, inset 0px -11px 8px -10px #CCC;
-}::-webkit-scrollbar {
+  box-shadow: inset 0px 11px 8px -10px #ccc, inset 0px -11px 8px -10px #ccc;
+}
+::-webkit-scrollbar {
   width: 15px;
-}::-webkit-scrollbar-track {
+}
+::-webkit-scrollbar-track {
   background: transparent;
-}::-webkit-scrollbar-thumb {
+}
+::-webkit-scrollbar-thumb {
   background: #7a7a7a;
   border-radius: 5px;
-}::-webkit-scrollbar-thumb:hover {
+}
+::-webkit-scrollbar-thumb:hover {
   background: #212121;
 }
 

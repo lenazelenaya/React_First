@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import './index.css';
+import "./index.css";
 
 interface InputState {
   typeMessage: string;
@@ -11,7 +11,10 @@ interface InputProps {
   addMessage: Function;
 }
 
-export default class MessageInput extends React.Component<InputProps, InputState> {
+export default class MessageInput extends React.Component<
+  InputProps,
+  InputState
+> {
   constructor(props: InputProps) {
     super(props);
     this.state = {
@@ -49,4 +52,3 @@ export default class MessageInput extends React.Component<InputProps, InputState
     );
   }
 }
-
