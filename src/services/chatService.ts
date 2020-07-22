@@ -32,9 +32,9 @@ class ChatService {
   getParticipantsCount(messages: Message[] | undefined) {
     if (messages === undefined) return 0;
     const list = new Set();
-    messages.map((message) => {
-      list.add(message.user);
-    });
+    for(let i = 0; i < messages.length; i++){
+      list.add(messages[i].user);
+    }
     return list.size;
   }
 
