@@ -1,10 +1,10 @@
 import React from "react";
-import './index.css'
+import "./index.css";
 
 interface HeaderState {}
 
 interface HeaderProps {
-  name: string,
+  name: string;
 }
 
 export default class Header extends React.Component<HeaderProps, HeaderState> {

@@ -1,12 +1,19 @@
 .chat-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+height: 100%;
+  background-color: #edeeee;
+  color: #212121e5;
+  display: grid;
+  grid-template-rows: 6% 88% 6%;
+  grid-template-columns: 100%;
+  justify-content: center;
 }
 
-.chat-window{
-    width: 70%;
-    background-color: #cccccc;
-    border-radius: 10px;
+.chat-window {
+  height: 90%;
+  padding: 0 1%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.3);
+  grid-area: 2/2/3/1;
 }

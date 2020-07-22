@@ -63,10 +63,13 @@ class Chat extends React.Component<ChatProps, ChatState> {
         text,
         user: "You",
         createdAt: date,
-        timeShow: cs.getTimeShow(new Date()),
+        timeShow: cs.getTimeShow(date),
       });
       const count = this.state.messageCount! + 1;
-      this.setState({ messages, messageCount: count, lastMessage: cs.getTimeShow(date) });
+      const participants = cs.getParticipantsCount(messages);
+      
+      this.setState({ messages, messageCount: count, lastMessage: cs.getTimeShow(date), participants });
+      
     }
   }
 
@@ -93,7 +96,7 @@ class Chat extends React.Component<ChatProps, ChatState> {
         />
         <div className="chat-window">
           <ChatHeader 
-            name={this.state.name!}
+            name={this.state.name! + '-chat'}
             participants={this.state.participants!}
             messageCount={this.state.messageCount!}
             lastMessage={this.state.lastMessage!}

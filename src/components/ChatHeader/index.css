@@ -1,15 +1,27 @@
 .chat-header {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
   justify-content: space-between;
-  padding: 1% 0;
+  padding: 5% 0 0 0;
 }
 
-.chat-header-div{
-    margin: 4px;
-    padding-bottom: 2px;
+.chat-header-div {
+  height: 60px;
+  display: flex;
+  align-content: space-around;
+  list-style: none;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  font-family: arvo;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
-.last-message{
-    margin-left: auto;
+.last-message {
+  border-right: 2px solid #c5dfd6;
+}
+.chat-header-counts {
+  text-align: left;
+  padding-left: 100px;
 }

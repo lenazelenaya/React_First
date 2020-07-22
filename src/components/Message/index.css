@@ -4,7 +4,7 @@
   box-shadow: 1px 0 5px black;
   display: grid;
   grid-template-columns: 1fr 5fr;
-  margin-bottom: 5px;
+  margin: 5px;
   padding: 5px;
   width: 50%;
 }

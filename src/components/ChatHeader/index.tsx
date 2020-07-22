@@ -25,14 +25,16 @@ export default class ChatHeader extends React.Component<headerProps, headerState
                 <div className="chat-name chat-header-div">
                     {this.props.name}
                 </div>
-                <div className="participants-count chat-header-div">
-                    <span>participants: {this.props.participants}</span>
-                </div>
-                <div className="messages-count chat-header-div">
-                    <span >messages: {this.props.messageCount}</span>
+                <div className="chat-header-div chat-header-counts">
+                    <div className="participants-count">
+                        <span className="text">participants:     {'      '}{this.props.participants}</span>
+                    </div>
+                    <div className="messages-count">
+                        <span className="text">messages:    {'      '}{this.props.messageCount}</span>
+                    </div>
                 </div>
                 <div className="last-message chat-header-div">
-                    <span>last message at: {this.props.lastMessage}</span>
+                    <span className="text">last message at:{'      '} {this.props.lastMessage}</span>
                 </div>
             </div>
         );

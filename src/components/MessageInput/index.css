@@ -5,12 +5,12 @@
 }
 
 .text-area {
-  border-right: none;
-  border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  border-color: #a0a0a0;
+  border: thin;
   resize: none;
   padding: 5px;
+  width: 100%;
+  height: 50px;
 }
 
 .text-area:focus {
@@ -20,7 +20,6 @@
 .message-input-btn {
   background-color: #979797;
   border: 2px;
-  border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   color: white;
   cursor: pointer;
