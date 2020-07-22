@@ -2,8 +2,9 @@ import Message from '../types/message'
 import dateFormat from './dateService'
 
 class MessageService{
-    isYourMessage(user: string, message: Message){
-        return user === message.user;
+  //If this message is your then you can edit and delete it
+    isYourMessage(message: Message){
+        return 'You' === message.user;
     }
 
     groupByDate(messages: Message[]){
@@ -23,6 +24,7 @@ class MessageService{
           });
           return groupArrays;
     }
+
 }
 
 export default new MessageService();

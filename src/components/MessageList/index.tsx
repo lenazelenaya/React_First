@@ -7,7 +7,6 @@ import ms from '../../services/messageService'
 interface ListState {}
 
 interface ListProps {
-  user: string;
   messages: Message[];
   addLike: Function;
   editMessage: Function;
@@ -16,7 +15,6 @@ interface ListProps {
 
 export default class MessageList extends React.Component<ListProps, ListState> {
   static propTypes = {
-    user: PropTypes.string,
     messages: PropTypes.array,
     addLike: PropTypes.func,
     editMessage: PropTypes.func,
@@ -35,7 +33,6 @@ export default class MessageList extends React.Component<ListProps, ListState> {
                 {groupsByDate.messages.map((message: Message, id: string) => (
                     <MessageC
                         id = {id}
-                        user = {this.props.user}
                         message = {message}
                         addLike = {this.props.addLike}
                         editMessage = {this.props.editMessage}

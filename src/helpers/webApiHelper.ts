@@ -49,7 +49,7 @@ export async function throwIfResponseFailed(res: any) {
 }
 
 export default async function callWebApi(endpoint: string, type: string) {
-  const res = await fetch(getFetchUrl(endpoint), getFetchArgs(type));
+  const res = await fetch(endpoint);
   await throwIfResponseFailed(res);
   return res;
 }
