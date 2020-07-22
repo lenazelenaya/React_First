@@ -89,12 +89,13 @@ class Chat extends React.Component<ChatProps, ChatState> {
   render() {
 
     return (
-      this.state.isLoading  ? <Spinner /> :
-      <div className="chat-wrapper">
+    <div className="chat-wrapper">
         <MainHeader
           name={this.state.name!}
         />
-        <div className="chat-window">
+        {
+          this.state.isLoading  ? <Spinner /> :
+        (<div className="chat-window">
           <ChatHeader 
             name={this.state.name! + '-chat'}
             participants={this.state.participants!}
@@ -108,7 +109,8 @@ class Chat extends React.Component<ChatProps, ChatState> {
             editMessage={this.editMessage}
           />
           <MessageInput addMessage={this.addMessage} />
-        </div>
+        </div>)
+        }
         <Footer />
       </div>
     );
