@@ -119,7 +119,7 @@ class Chat extends React.Component<ChatProps, ChatState> {
 
   render() {
     return (
-      <div className="chat-wrapper">
+      <div className="wrapper">
         {this.state.modalOn ? (
           <Modal
             toggle={this.toggle}
@@ -129,7 +129,7 @@ class Chat extends React.Component<ChatProps, ChatState> {
         ) : (
           ""
         )}
-        <div className="wrapper">
+        <div className="chat-wrapper">
           <MainHeader name={this.state.name!} />
           {this.state.isLoading ? (
             <Spinner />
