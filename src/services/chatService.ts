@@ -8,10 +8,11 @@ class ChatService {
     const type: string = "GET";
     const response: Response = await callWebApi(endpoint, type);
     const messages: Message[] = await response.json();
-    messages.map((message) => {
+    const msgs: Message[] = messages.map((message) => {
       message.timeShow = this.getTimeShow(message.createdAt);
+      return message;
     });
-    return messages.sort(this.dateComparator);
+    return msgs.sort(this.dateComparator);
   }
 
   //Time that is seen on the message box
