@@ -6,7 +6,6 @@ import ms from "../../services/messageService";
 import "./index.css";
 
 interface MessageProps {
-  id: string;
   message: Message;
   addLike: Function;
   editMessage: Function;
@@ -20,7 +19,6 @@ class MessageC extends React.Component<
 > {
   static propTypes = {
     message: PropTypes.object,
-    numberMessage: PropTypes.number,
     addLike: PropTypes.func,
     editMessage: PropTypes.func,
     deleteMessage: PropTypes.func,
@@ -72,7 +70,7 @@ class MessageC extends React.Component<
         <div className="actions">
           <button
             className="message-like action"
-            onClick={() => this.props.addLike(this.props.id)}
+            onClick={() => this.props.addLike(this.props.message)}
           >
             {this.props.message.likes ? "You like this" : "Like?"}
           </button>

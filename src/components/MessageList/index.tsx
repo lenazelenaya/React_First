@@ -31,7 +31,7 @@ export default class MessageList extends React.Component<ListProps, ListState> {
                   <div className="separator">{groupsByDate.date}</div>
                   {groupsByDate.messages.map((message: Message, id: string) => (
                       <MessageC
-                          id = {id}
+                          key = {id}
                           message = {message}
                           addLike = {this.props.addLike}
                           editMessage = {this.props.editMessage}
