@@ -58,8 +58,7 @@ class Chat extends React.Component<ChatProps, ChatState> {
         if (messages![i].likes) {
           messages![i].likes! = 0;
           console.log("Don't like this message");
-        }
-        else {
+        } else {
           messages![i].likes = 1;
           console.log("Like this message");
         }
