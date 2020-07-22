@@ -22,25 +22,22 @@ export default class MessageList extends React.Component<ListProps, ListState> {
     editMessage: PropTypes.func,
     deleteMessage: PropTypes.func,
   };
-  constructor(props: ListProps){
-    super(props);
-  }
 
   render() {
     return (
         <div className="message-list">
-            {ms.groupByDate(this.props.messages).map((groupsByDate, id) => (
-                <div key={id}>
-                <div className="separator">{groupsByDate.date}</div>
-                {groupsByDate.messages.map((message: Message, id: string) => (
-                    <MessageC
-                        id = {id}
-                        message = {message}
-                        addLike = {this.props.addLike}
-                        editMessage = {this.props.editMessage}
-                        deleteMessage = {this.props.deleteMessage}
-                    />
-                ))}
+            {ms.groupByDate(this.props.messages).map((groupsByDate) => (
+                <div className="message-list-group">
+                  <div className="separator">{groupsByDate.date}</div>
+                  {groupsByDate.messages.map((message: Message, id: string) => (
+                      <MessageC
+                          id = {id}
+                          message = {message}
+                          addLike = {this.props.addLike}
+                          editMessage = {this.props.editMessage}
+                          deleteMessage = {this.props.deleteMessage}
+                      />
+                  ))}
                 </div>
             ))}
         </div>

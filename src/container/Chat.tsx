@@ -13,6 +13,7 @@ import './chat.css'
 
 interface ChatState {
   isLoading: boolean;
+  modalOn: boolean;
   messages?: Message[];
   name: string;
   participants?: number;
@@ -28,29 +29,35 @@ class Chat extends React.Component<ChatProps, ChatState> {
     this.state = {
       name: "LOGO",
       isLoading: true,
+      modalOn: false,
     };
     this.addLike = this.addLike.bind(this);
     this.addMessage = this.addMessage.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
-    this.editMessage = this.editMessage.bind(this);
+    //this.editMessage = this.editMessage.bind(this);
   }
 
   componentDidMount() {
     cs.loadData().then(({ messages, participants, messageCount }) => {
       this.setState({
         isLoading: false,
+        modalOn: false,
         messages: messages,
         participants,
         messageCount: messageCount,
-        lastMessage: messages[messages.length -1].timeShow,
+        lastMessage: messages[messages.length - 1].timeShow,
       });
     });
   }
 
-  addLike(id: number) {
+  addLike(id: string) {
     const messages = this.state.messages;
-    if (messages![id].likes) messages![id].likes! = 0;
-    else  messages![id].likes = 1;
+    for(let i = 0; i < messages!.length; i++){
+      if(messages![i].id === id) {
+        if(messages![i].likes === 1) messages![i].likes = 0;
+        else messages![i].likes = 1;
+      }
+    }
     this.setState({ messages });
   }
 
@@ -73,17 +80,25 @@ class Chat extends React.Component<ChatProps, ChatState> {
     }
   }
 
-  deleteMessage(id: number) {
+  deleteMessage(message: Message) {
     const messages = this.state.messages;
-    messages![id].text = "This message has been deleted";
+    for(let i = 0; i < messages!.length; i++){
+      if(messages![i].id === message.id) {
+          messages![i].text = "This message has been deleted";
+      }
+    }
     const c = this.state.messageCount! - 1;
     this.setState({ messages, messageCount: c });
   }
 
-  editMessage(id: number, newText: string) {
+  editMessage(id: string) {
     const messages = this.state.messages;
-    messages![id].text = newText;
-    this.setState({ messages });
+    // for(let i = 0; i < messages!.length; i++){
+    //   if(messages![i].id === id) {
+        
+    //   }
+
+    this.setState({ messages, modalOn: true });
   }
 
   render() {

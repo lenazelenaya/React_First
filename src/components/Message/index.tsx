@@ -3,7 +3,7 @@ import Message from "../../types/message";
 import PropTypes from "prop-types";
 import ms from "../../services/messageService";
 
-import './index.css';
+import "./index.css";
 
 interface MessageProps {
   id: string;
@@ -14,17 +14,10 @@ interface MessageProps {
 }
 interface MessageState {}
 
-export default class MessageC extends React.Component<
+class MessageC extends React.Component<
   MessageProps,
   MessageState
 > {
-  constructor(props: MessageProps) {
-    super(props);
-    this.state = {
-      likes: 0,
-    };
-  }
-
   static propTypes = {
     message: PropTypes.object,
     numberMessage: PropTypes.number,
@@ -50,7 +43,7 @@ export default class MessageC extends React.Component<
           </div>
           <div
             className="message-delete action"
-            onClick={() => this.props.deleteMessage(this.props.message.id)}
+            onClick={() => this.props.deleteMessage(this.props.message)}
           >
             Delete
           </div>
@@ -63,7 +56,11 @@ export default class MessageC extends React.Component<
     <div className="message-container not-your-message">
       <div className="message-avatar">
         <div className="message-avatar-shadow">
-          <img className="avatar" src={this.props.message.avatar} alt="avatar" />
+          <img
+            className="avatar"
+            src={this.props.message.avatar}
+            alt="avatar"
+          />
         </div>
       </div>
       <div className="message-content">
@@ -73,11 +70,15 @@ export default class MessageC extends React.Component<
         </div>
         <div className="message-text">{this.props.message.text}</div>
         <div className="actions">
-          <div className="message-like action" onClick={() => this.props.addLike(this.props.id)}>
-            <span className="like">
-              {this.props.message.likes ? this.props.message.likes : null} {this.props.message.likes ? "You like this" : "Like?"}
-            </span>
-          </div>
+          <button
+            className="message-like action"
+            onClick={() => this.props.addLike(this.props.id)}
+          >
+            {this.props.message.likes ? "You like this" : "Like?"}
+          </button>
+          <span className="like">
+            {this.props.message.likes ? this.props.message.likes : null}{" "}
+          </span>
         </div>
       </div>
     </div>
@@ -89,3 +90,5 @@ export default class MessageC extends React.Component<
       : this.notYourMessage;
   }
 }
+
+export default MessageC;
