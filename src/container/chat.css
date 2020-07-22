@@ -1,0 +1,12 @@
+.chat-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-window{
+    width: 70%;
+    background-color: #cccccc;
+    border-radius: 10px;
+}

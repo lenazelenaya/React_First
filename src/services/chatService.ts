@@ -30,11 +30,11 @@ class ChatService {
   };
 
   getParticipantsCount(messages: Message[]) {
-    const list = [];
+    const list = new Set();
     messages.map((message) => {
-      list.push(message.user);
+      list.add(message.user);
     });
-    return list.length;
+    return list.size;
   }
 
   async loadData() {

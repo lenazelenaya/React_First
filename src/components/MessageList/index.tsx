@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import MessageC from '../Message/index'
 import ms from '../../services/messageService'
 
+import './index.css'
+
 interface ListState {}
 
 interface ListProps {
@@ -29,7 +31,7 @@ export default class MessageList extends React.Component<ListProps, ListState> {
         <div className="message-list">
             {ms.groupByDate(this.props.messages).map((groupsByDate, id) => (
                 <div key={id}>
-                <div className="divider">{groupsByDate.date}</div>
+                <div className="separator">{groupsByDate.date}</div>
                 {groupsByDate.messages.map((message: Message, id: string) => (
                     <MessageC
                         id = {id}

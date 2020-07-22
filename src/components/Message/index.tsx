@@ -3,6 +3,8 @@ import Message from "../../types/message";
 import PropTypes from "prop-types";
 import ms from "../../services/messageService";
 
+import './index.css';
+
 interface MessageProps {
   id: string;
   message: Message;
@@ -32,45 +34,50 @@ export default class MessageC extends React.Component<
   };
 
   yourMessage = (
-    <div className="message-container">
-      <div className="message-meta">
-        <span className="message-date"></span>
-        <span className="message-author">Your message</span>
-      </div>
-      <div className="message-text">{this.props.message.text}</div>
-      <div className="actions">
-        <div
-          className="message-edit"
-          onClick={() => this.props.editMessage(this.props.message)}
-        >
-          Edit
+    <div className="message-container your-message">
+      <div className="message-content">
+        <div className="message-meta">
+          <span className="message-date"></span>
+          <span className="message-author">Your message</span>
         </div>
-        <div
-          className="message-delete"
-          onClick={() => this.props.deleteMessage(this.props.message.id)}
-        >
-          Delete
+        <div className="message-text">{this.props.message.text}</div>
+        <div className="actions">
+          <div
+            className="message-edit action"
+            onClick={() => this.props.editMessage(this.props.message)}
+          >
+            Edit
+          </div>
+          <div
+            className="message-delete action"
+            onClick={() => this.props.deleteMessage(this.props.message.id)}
+          >
+            Delete
+          </div>
         </div>
       </div>
     </div>
   );
 
   notYourMessage = (
-    <div className="message-container">
+    <div className="message-container not-your-message">
       <div className="message-avatar">
-        <img className="avatar" src={this.props.message.avatar} alt="avatar" />
+        <div className="message-avatar-shadow">
+          <img className="avatar" src={this.props.message.avatar} alt="avatar" />
+        </div>
       </div>
-      <div className="message-meta">
-        <span className="message-date"></span>
-        <span className="message-author">{this.props.message.user}</span>
-      </div>
-      <div className="message-text">{this.props.message.text}</div>
-      <div className="actions">
-        <div onClick={() => this.props.addLike(this.props.id)}>
-          <span className="like">
-            {this.props.message.likes ? this.props.message.likes : null}
-          </span>
-          <i className="fa fa-thumbs-up" aria-hidden="true"></i>
+      <div className="message-content">
+        <div className="message-meta">
+          <span className="message-date">{this.props.message.timeShow}</span>
+          <span className="message-author">{this.props.message.user}</span>
+        </div>
+        <div className="message-text">{this.props.message.text}</div>
+        <div className="actions">
+          <div className="message-like action" onClick={() => this.props.addLike(this.props.id)}>
+            <span className="like">
+              {this.props.message.likes ? this.props.message.likes : null} {this.props.message.likes ? "You like this" : "Like?"}
+            </span>
+          </div>
         </div>
       </div>
     </div>

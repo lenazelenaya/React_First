@@ -8,6 +8,8 @@ import MessageInput from '../components/MessageInput/index'
 import MainHeader from '../components/MainHeader/index'
 import Footer from '../components/Footer/index'
 
+import './chat.css'
+
 
 interface ChatState {
   isLoading: boolean;
@@ -55,15 +57,16 @@ class Chat extends React.Component<ChatProps, ChatState> {
   addMessage(text: string) {
     if (text) {
       const messages = this.state.messages;
+      const date = new Date();
       messages!.push({
         id: '17',
         text,
         user: "You",
-        createdAt: new Date(),
+        createdAt: date,
         timeShow: cs.getTimeShow(new Date()),
       });
       const count = this.state.messageCount! + 1;
-      this.setState({ messages, messageCount: count });
+      this.setState({ messages, messageCount: count, lastMessage: cs.getTimeShow(date) });
     }
   }
 

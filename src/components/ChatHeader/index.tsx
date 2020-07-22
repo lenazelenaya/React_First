@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import './index.css';
 
 interface headerState {}
 
@@ -21,17 +22,17 @@ export default class ChatHeader extends React.Component<headerProps, headerState
     render(){
         return(
             <div className="chat-header">
-                <div>
+                <div className="chat-name chat-header-div">
                     {this.props.name}
                 </div>
-                <div>
+                <div className="participants-count chat-header-div">
                     <span>participants: {this.props.participants}</span>
                 </div>
-                <div>
-                    <span>messages: {this.props.messageCount}</span>
+                <div className="messages-count chat-header-div">
+                    <span >messages: {this.props.messageCount}</span>
                 </div>
-                <div>
-                    <span>LastMessage at: {this.props.lastMessage}</span>
+                <div className="last-message chat-header-div">
+                    <span>last message at: {this.props.lastMessage}</span>
                 </div>
             </div>
         );

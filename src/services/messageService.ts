@@ -10,7 +10,7 @@ class MessageService{
     groupByDate(messages: Message[]){
         const groups = messages.reduce((groups: any, message: Message) => {
             const date = new Date(message.createdAt);
-            const separatorName = dateFormat.isYesterday(date) ? "Yesterday" : date.toLocaleDateString();
+            const separatorName = dateFormat.getFormatDate(date);
             if (!groups[separatorName]) { groups[separatorName] = []; }
             groups[separatorName].push(message);
             return groups;
@@ -24,7 +24,6 @@ class MessageService{
           });
           return groupArrays;
     }
-
 }
 
 export default new MessageService();

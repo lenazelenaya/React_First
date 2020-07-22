@@ -1,0 +1,15 @@
+.chat-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1% 0;
+}
+
+.chat-header-div{
+    margin: 4px;
+    padding-bottom: 2px;
+}
+
+.last-message{
+    margin-left: auto;
+}
