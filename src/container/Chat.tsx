@@ -35,7 +35,7 @@ class Chat extends React.Component<ChatProps, ChatState> {
     this.addLike = this.addLike.bind(this);
     this.addMessage = this.addMessage.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
-    this.editMessage = this.editMessage.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
   componentDidMount() {

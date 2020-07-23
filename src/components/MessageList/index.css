@@ -3,7 +3,7 @@
   height: 65vh;
   overflow: auto;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   box-shadow: inset 0px 11px 8px -10px #CCC, inset 0px -11px 8px -10px #CCC;
 }::-webkit-scrollbar {
   width: 15px;
