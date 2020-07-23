@@ -7,9 +7,10 @@ import ChatHeader from "../components/ChatHeader/index";
 import MessageInput from "../components/MessageInput/index";
 import MainHeader from "../components/MainHeader/index";
 import Footer from "../components/Footer/index";
+import EditModal from "../components/Modal";
 
 import "./chat.css";
-import Modal from "../components/Modal";
+
 
 interface ChatState {
   isLoading: boolean;
@@ -32,7 +33,6 @@ class Chat extends React.Component<ChatProps, ChatState> {
       isLoading: true,
       modalOn: false,
     };
-    this.addLike = this.addLike.bind(this);
     this.addMessage = this.addMessage.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
     this.toggle = this.toggle.bind(this);
@@ -51,28 +51,12 @@ class Chat extends React.Component<ChatProps, ChatState> {
     });
   }
 
-  addLike(message: Message) {
-    const messages = this.state.messages;
-    for (let i = 0; i < messages!.length; i++) {
-      if (messages![i].id === message.id) {
-        if (messages![i].likes) {
-          messages![i].likes! = 0;
-          console.log("Don't like this message");
-        } else {
-          messages![i].likes = 1;
-          console.log("Like this message");
-        }
-      }
-    }
-    this.setState({ messages });
-  }
-
   addMessage(text: string) {
     if (text) {
       const messages = this.state.messages;
       const date = new Date();
       messages!.push({
-        id: "17",
+        id: (Math.random() * new Date().getTime()).toString(),
         text,
         user: "You",
         createdAt: date,
@@ -94,11 +78,10 @@ class Chat extends React.Component<ChatProps, ChatState> {
     const messages = this.state.messages;
     for (let i = 0; i < messages!.length; i++) {
       if (messages![i].id === message.id) {
-        messages![i].text = "This message has been deleted";
-        console.log("message is deleted");
+        messages?.splice(i, 1);
       }
     }
-    const c = this.state.messageCount! - 1;
+    const c = messages?.length;
     this.setState({ messages, messageCount: c });
   }
 
@@ -121,7 +104,7 @@ class Chat extends React.Component<ChatProps, ChatState> {
     return (
       <div className="wrapper">
         {this.state.modalOn ? (
-          <Modal
+          <EditModal
             toggle={this.toggle}
             message={this.state.editedMessage!}
             editMessage={this.editMessage}
@@ -143,7 +126,6 @@ class Chat extends React.Component<ChatProps, ChatState> {
               />
               <MessageList
                 messages={this.state.messages!}
-                addLike={this.addLike}
                 deleteMessage={this.deleteMessage}
                 editMessage={this.toggle}
               />

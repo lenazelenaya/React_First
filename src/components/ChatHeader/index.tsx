@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./index.css";
 
-interface headerState {}
+interface HeaderState {}
 
-interface headerProps {
+interface HeaderProps {
   name: string;
   participants: number;
   messageCount: number;
@@ -12,15 +12,26 @@ interface headerProps {
 }
 
 export default class ChatHeader extends React.Component<
-  headerProps,
-  headerState
+  HeaderProps,
+  HeaderState
 > {
   static prop = {
     name: PropTypes.string,
     participants: PropTypes.number,
-    messages: PropTypes.number,
+    messageCount: PropTypes.number,
     lastMessage: PropTypes.string,
   };
+
+  shouldComponentUpdate(nextProps: HeaderProps) {
+    if (
+      nextProps.name === this.props.name &&
+      nextProps.participants === this.props.participants &&
+      nextProps.messageCount === this.props.messageCount &&
+      nextProps.lastMessage === this.props.lastMessage
+    ) {
+      return false;
+    } else return true;
+  }
 
   render() {
     return (
@@ -35,15 +46,13 @@ export default class ChatHeader extends React.Component<
           </div>
           <div className="messages-count">
             <span className="text">
-              messages: {"      "}
+              messages: {"       "}
               {this.props.messageCount}
             </span>
           </div>
         </div>
         <div className="last-message chat-header-div">
-          <span className="text">
-            last message at:{"      "} {this.props.lastMessage}
-          </span>
+          last message at:{"  "}{this.props.lastMessage}
         </div>
       </div>
     );

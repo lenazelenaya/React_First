@@ -14,7 +14,16 @@ interface ModalState {
   text: string;
 }
 
-export default class Modal extends React.Component<ModalProps, ModalState> {
+export default class EditModal extends React.Component<ModalProps, ModalState> {
+  shouldComponentUpdate(nextProps: ModalProps) {
+    if (
+      nextProps.toggle === this.props.toggle &&
+      nextProps.editMessage === this.props.editMessage &&
+      nextProps.message === this.props.message
+    ) {
+      return false;
+    } else return true;
+  }
   static propTypes = {
     message: PropTypes.object,
     toggle: PropTypes.func,
@@ -25,19 +34,27 @@ export default class Modal extends React.Component<ModalProps, ModalState> {
     this.state = {
       text: this.props.message.text,
     };
+    this.setText = this.setText.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
+    this.handleTyping = this.handleTyping.bind(this);
   }
 
-  setText(text: string){
-      this.setState({ text });
+  setText(text: string) {
+    this.setState({ text });
   }
 
   handleEditClick() {
     this.setText("");
-    this.props.toggle();
     this.props.editMessage(this.props.message, this.state.text);
+    this.props.toggle();
+  }
+
+  handleTyping(event: React.FormEvent<HTMLInputElement>) {
+    this.setState({ text: event.currentTarget.value });
   }
 
   render() {
+    let text = this.state.text;
     return (
       <div className="modal-layer">
         <div className="modal-root">
@@ -52,8 +69,8 @@ export default class Modal extends React.Component<ModalProps, ModalState> {
               <input
                 type="text"
                 className="edit-text-area"
-                value={this.state.text}
-                onChange={(event) => this.setText(event.target.value)}
+                value={text}
+                onChange={() => this.handleTyping}
               />
               <button className="edit-btn" onClick={this.handleEditClick}>
                 Edit

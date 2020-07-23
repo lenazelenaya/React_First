@@ -2,18 +2,17 @@ import React from "react";
 import Message from "../../types/message";
 import PropTypes from "prop-types";
 import ms from "../../services/messageService";
+import InputMessage from "./InputMessage";
+import OutputMessage from "./OutputMessage";
 
 import "./index.css";
 
 interface MessageProps {
   message: Message;
-  addLike: Function;
   editMessage: Function;
   deleteMessage: Function;
 }
-interface MessageState {
-  likes?: number;
-}
+interface MessageState {}
 
 export default class MessageC extends React.Component<
   MessageProps,
@@ -21,78 +20,29 @@ export default class MessageC extends React.Component<
 > {
   static propTypes = {
     message: PropTypes.object,
-    addLike: PropTypes.func,
     editMessage: PropTypes.func,
     deleteMessage: PropTypes.func,
   };
-  constructor(props: MessageProps){
-    super(props);
-      this.state = {
-        likes: 0,
-      }
+
+  shouldComponentUpdate(nextProps: MessageProps) {
+    if (
+      nextProps.deleteMessage === this.props.deleteMessage &&
+      nextProps.editMessage === this.props.editMessage &&
+      nextProps.message === this.props.message
+    ) {
+      return false;
+    } else return true;
   }
 
-  yourMessage = (
-    <div className="message-container your-message">
-      <div className="message-content">
-        <div className="message-meta">
-          <span className="message-date"></span>
-          <span className="message-author">Your message</span>
-        </div>
-        <div className="message-text">{this.props.message.text}</div>
-        <div className="actions">
-          <div
-            className="message-edit action"
-            onClick={() => this.props.editMessage(this.props.message)}
-          >
-            Edit
-          </div>
-          <div
-            className="message-delete action"
-            onClick={() => this.props.deleteMessage(this.props.message)}
-          >
-            Delete
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  notYourMessage = (
-    <div className="message-container not-your-message">
-      <div className="message-avatar">
-        <div className="message-avatar-shadow">
-          <img
-            className="avatar"
-            src={this.props.message.avatar}
-            alt="avatar"
-          />
-        </div>
-      </div>
-      <div className="message-content">
-        <div className="message-meta">
-          <span className="message-date">{this.props.message.timeShow}</span>
-          <span className="message-author">{this.props.message.user}</span>
-        </div>
-        <div className="message-text">{this.props.message.text}</div>
-        <div className="actions">
-          <div
-            className="message-like action"
-            onClick={() => this.props.addLike(this.props.message)}
-          >
-            <span className="like">
-              {this.props.message.likes ? this.props.message.likes : null}{" "}
-              {this.props.message.likes ? "You like this" : "Like?"}
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
   render() {
-    return ms.isYourMessage(this.props.message)
-      ? this.yourMessage
-      : this.notYourMessage;
+    return ms.isYourMessage(this.props.message) ? (
+      <OutputMessage
+        message={this.props.message}
+        deleteMessage={this.props.deleteMessage}
+        editMessage={this.props.editMessage}
+      />
+    ) : (
+      <InputMessage message={this.props.message} />
+    );
   }
 }

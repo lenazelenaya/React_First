@@ -11,7 +11,7 @@
   }
   
   .modal-root {
-    background-color: #b2dfdb;
+    background-color: #d4d4d4;
     border-radius: 10px;
     box-shadow: 1px 0 5px black;
     display: flex;
@@ -61,7 +61,7 @@
     border-right: none;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-    border-color: #009688;
+    border-color: #fafafa;
     resize: none;
     padding: 5px;
   }
@@ -71,7 +71,7 @@
   }
   
   .edit-btn {
-    background-color: #009688;
+    background-color: #a7a7a7;
     border: none;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -82,7 +82,7 @@
   }
   
   .edit-btn:hover {
-    background-color: #00796b;
+    background-color: #8b8b8b;
   }
   
   .edit-btn:focus {
