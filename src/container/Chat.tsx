@@ -11,7 +11,6 @@ import EditModal from "../components/Modal";
 
 import "./chat.css";
 
-
 interface ChatState {
   isLoading: boolean;
   modalOn: boolean;
@@ -32,10 +31,12 @@ class Chat extends React.Component<ChatProps, ChatState> {
       name: "LOGO",
       isLoading: true,
       modalOn: false,
+      messages: [],
     };
     this.addMessage = this.addMessage.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.editMessage = this.editMessage.bind(this);
   }
 
   componentDidMount() {
@@ -56,7 +57,7 @@ class Chat extends React.Component<ChatProps, ChatState> {
       const messages = this.state.messages;
       const date = new Date();
       messages!.push({
-        id: (Math.random() * new Date().getTime()).toString(),
+        id: cs.generateId(),
         text,
         user: "You",
         createdAt: date,
@@ -86,18 +87,17 @@ class Chat extends React.Component<ChatProps, ChatState> {
   }
 
   toggle(message: Message) {
-    console.log(message);
     this.setState({ editedMessage: message, modalOn: !this.state.modalOn });
   }
 
   editMessage(message: Message, text: string) {
-    const messages = this.state.messages;
+    let messages = this.state.messages!;
     for (let i = 0; i < messages!.length; i++) {
       if (messages![i].id === message.id) {
         messages![i].text = text;
       }
     }
-    this.setState({ messages, modalOn: true });
+    this.setState({ messages, modalOn: !this.state.modalOn });
   }
 
   render() {

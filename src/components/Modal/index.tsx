@@ -35,10 +35,6 @@ export default class EditModal extends React.Component<ModalProps, ModalState> {
   }
 
   handleEditClick() {
-    const isValid = Boolean(this.state.text);
-    if (!isValid) {
-      return;
-    }
     this.setText("");
     this.props.toggle();
     this.props.editMessage(this.props.message, this.state.text);
@@ -58,7 +54,7 @@ export default class EditModal extends React.Component<ModalProps, ModalState> {
           </div>
           <div className="modal-body">
             <div className="edit-form">
-            <input
+              <input
                 type="text"
                 className="edit-text-area"
                 value={text}
