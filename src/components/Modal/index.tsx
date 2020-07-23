@@ -15,15 +15,6 @@ interface ModalState {
 }
 
 export default class EditModal extends React.Component<ModalProps, ModalState> {
-  shouldComponentUpdate(nextProps: ModalProps) {
-    if (
-      nextProps.toggle === this.props.toggle &&
-      nextProps.editMessage === this.props.editMessage &&
-      nextProps.message === this.props.message
-    ) {
-      return false;
-    } else return true;
-  }
   static propTypes = {
     message: PropTypes.object,
     toggle: PropTypes.func,
@@ -44,9 +35,13 @@ export default class EditModal extends React.Component<ModalProps, ModalState> {
   }
 
   handleEditClick() {
+    const isValid = Boolean(this.state.text);
+    if (!isValid) {
+      return;
+    }
     this.setText("");
-    this.props.editMessage(this.props.message, this.state.text);
     this.props.toggle();
+    this.props.editMessage(this.props.message, this.state.text);
   }
 
   handleTyping(event: React.FormEvent<HTMLInputElement>) {
@@ -60,13 +55,10 @@ export default class EditModal extends React.Component<ModalProps, ModalState> {
         <div className="modal-root">
           <div className="modal-header">
             <span>Edit Message</span>
-            <div className="close-btn" onClick={this.props.toggle()}>
-              <i className="fa fa-times" aria-hidden="true"></i>
-            </div>
           </div>
           <div className="modal-body">
             <div className="edit-form">
-              <input
+            <input
                 type="text"
                 className="edit-text-area"
                 value={text}
@@ -74,6 +66,9 @@ export default class EditModal extends React.Component<ModalProps, ModalState> {
               />
               <button className="edit-btn" onClick={this.handleEditClick}>
                 Edit
+              </button>
+              <button className="cancel-btn" onClick={() => this.props.toggle()}>
+                Cancel
               </button>
             </div>
           </div>
