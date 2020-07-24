@@ -65,13 +65,13 @@ class Chat extends React.Component<ChatProps, ChatState> {
       });
       const count = this.state.messageCount! + 1;
       const participants = cs.getParticipantsCount(messages);
-
       this.setState({
         messages,
         messageCount: count,
         lastMessage: cs.getTimeShow(date),
         participants,
       });
+      cs.scrollBottom();
     }
   }
 

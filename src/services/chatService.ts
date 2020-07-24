@@ -48,6 +48,11 @@ class ChatService {
   generateId(){
     return (Math.random() * new Date().getTime()).toString();
   }
+
+  scrollBottom(){
+    const list = document.getElementById('list');
+    list!.scrollTop = list!.scrollHeight;
+  }
 }
 
 export default new ChatService();

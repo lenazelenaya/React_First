@@ -3,6 +3,7 @@ import Message from "../../types/message";
 import PropTypes from "prop-types";
 import MessageC from "../Message/index";
 import ms from "../../services/messageService";
+import cs from "../../services/chatService";
 
 import "./index.css";
 
@@ -23,7 +24,7 @@ export default class MessageList extends React.Component<ListProps, ListState> {
 
   render() {
     return (
-      <div className="message-list">
+      <div className="message-list" id="list">
         {ms.groupByDate(this.props.messages).map((groupsByDate, id) => (
           <div className="message-list-group" key={id}>
             <div className="separator">{groupsByDate.date}</div>
@@ -39,5 +40,6 @@ export default class MessageList extends React.Component<ListProps, ListState> {
         ))}
       </div>
     );
+    
   }
 }
